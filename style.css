@@ -1,0 +1,36 @@
+body {
+  margin: 10px;
+  background: #009578;
+}
+
+#add_button {
+  width: 200px;
+  height: 200px;
+  font-size: 80px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
+}
+
+#add_button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#note_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 20px;
+}
+
+.notes {
+  background-color: white;
+  box-sizing: border-box;
+  height: 200px;
+  width: 200px;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-family: sans-serif;
+}
