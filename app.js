@@ -1,43 +1,49 @@
-const noteContainer = document.getElementById("note_container");
-const addButton = document.getElementById("add_button");
+const noteContainer = document.getElementById("app");
+const addBtn = document.getElementById("add_button");
+
+getNotes().forEach((note) => {
+  const noteElement = createNoteElement(note.id, note.content);
+  noteContainer.insertBefore(noteElement, addBtn);
+});
+
+addBtn.addEventListener("click", () => addNote());
 
 function getNotes() {
-  return JSON.parse(localStorage.getItem("sticky-notes") || "[]");
+  return JSON.parse(localStorage.getItem("stickynotes-notes") || "[]");
 }
 
 function saveNotes(notes) {
-  localStorage.setItem(JSON.stringify(notes));
+  localStorage.setItem("stickynotes-notes", JSON.stringify(notes));
 }
 
 function createNoteElement(id, content) {
   const element = document.createElement("textarea");
-  element.placeholder = "write a thing to do.";
-  element.classList.add("notes");
+  element.classList.add("note");
   element.value = content;
+  element.placeholder = "write a things you want.";
+
   element.addEventListener("change", () => {
     updateNotes(id, element.value);
   });
 
   element.addEventListener("dblclick", () => {
-    const doDelete = confirm("Are you sure to delete?");
-    if (doDelete) {
-      deleteNote(id, element);
+    const deleteConfirm = confirm("Are you sure to delete this note?");
+    if (deleteConfirm) {
+      deleteNotes(id, element);
     }
   });
   return element;
 }
 
-function addNotes() {
+function addNote() {
   const notes = getNotes();
   const noteObject = {
     id: Date.now(),
     content: "",
   };
-
   const noteElement = createNoteElement(noteObject.id, noteObject.content);
-  noteContainer.insertBefore(noteElement, addButton);
-
-  notes.puah(noteObject);
+  noteContainer.insertBefore(noteElement, addBtn);
+  notes.push(noteObject);
   saveNotes(notes);
 }
 
@@ -48,10 +54,8 @@ function updateNotes(id, newContent) {
   saveNotes(notes);
 }
 
-function deleteNote(id, element) {
+function deleteNotes(id, element) {
   const notes = getNotes().filter((note) => note.id != id);
   saveNotes(notes);
   noteContainer.removeChild(element);
 }
-
-addButton.addEventListener("click", () => addNotes());
