@@ -12,6 +12,6 @@ HTML요소를 생성하여 DOM에 추가, grid-template, 로컬 스토리지의 
 * 더블 클릭 시 메모장 삭제 
   
 ### Result
-
+https://sexychoco.github.io/notes-app/
   
-
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/95459711/169025513-73c02da1-7f35-4939-965c-cf03a16dafad.gif)
